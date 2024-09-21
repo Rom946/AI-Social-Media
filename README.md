@@ -68,6 +68,8 @@ This project is a web application that generates images using the Stable Diffusi
 2. Click on the "Generate Comment" button to add a random comment to the post.
 
 ## Project Structure
+
+```
 image-generation-project/
 ├── app/
 │   ├── __init__.py
@@ -98,7 +100,7 @@ image-generation-project/
 ├── requirements.txt
 ├── run.py
 └── .env
-
+```
 
 ## Dependencies
 
@@ -112,6 +114,8 @@ image-generation-project/
 - requests
 - huggingface_hub
 - certifi
+- pytest
+- coverage
 
 ## Contributing
 
