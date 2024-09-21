@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Project Health Check{% endblock %}
+
+{% block content %}
+<h1>Project Health Check</h1>
+
+{% if issues %}
+    <h2>Issues Found:</h2>
+    <ul>
+    {% for issue in issues %}
+        <li>{{ issue }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No issues found. Your project structure looks good!</p>
+{% endif %}
+
+<h2>Expected Project Structure:</h2>
+<pre>
+your_project_folder/
+│
+├── app.py
+├── ImageGeneration.py
+├── static/
+│   ├── styles.css
+│   └── interactions.js
+└── templates/
+    ├── base.html
+    ├── home.html
+    ├── generate.html
+    ├── about.html
+    └── health_check.html
+</pre>
+
+{% endblock %}

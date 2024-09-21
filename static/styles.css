@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: #262626;
+}
+
+.post-generator {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.post-generator input {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.post-generator button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.post {
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.post h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.post p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.post img {
+    width: 100%;
+    height: auto;
+}
+
+.post .caption {
+    margin: 10px 0;
+}
+
+.post-actions {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.post-actions button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.post-actions input {
+    flex-grow: 1;
+    padding: 5px;
+}
+
+.comments p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+nav {
+    background-color: #fff;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #262626;
+    text-decoration: none;
+}

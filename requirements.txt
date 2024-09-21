@@ -1,0 +1,10 @@
+flask==2.3.2
+transformers==4.33.2
+diffusers==0.24.0
+torch==2.0.1
+torchvision==0.15.2
+torchaudio==2.0.2
+Pillow==10.0.0
+requests==2.31.0
+huggingface_hub==0.17.2
+certifi==2023.7.22
