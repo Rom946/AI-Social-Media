@@ -8,3 +8,5 @@ Pillow==10.0.0
 requests==2.31.0
 huggingface_hub==0.17.2
 certifi==2023.7.22
+pytest==7.4.2
+coverage==7.3.1

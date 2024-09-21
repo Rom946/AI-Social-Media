@@ -46,7 +46,7 @@ This project is a web application that generates images using the Stable Diffusi
 5. **Run the application:**
 
    ```sh
-   python app.py
+   python run.py
    ```
 
 6. **Open your web browser and navigate to:**
@@ -68,14 +68,36 @@ This project is a web application that generates images using the Stable Diffusi
 2. Click on the "Generate Comment" button to add a random comment to the post.
 
 ## Project Structure
-├── ImageGeneration.py # Contains the ImageGenerator class for generating images and text
-├── app.py # Main Flask application
-├── requirements.txt # List of project dependencies
-├── templates/ # HTML templates for the web application
-│ ├── home.html # Home page template
-│ └── post.html # Post details template
-└── static/ # Static files (CSS, JS, images)
-
+image-generation-project/
+├── app/
+│   ├── __init__.py
+│   ├── routes.py
+│   ├── models.py
+│   ├── templates/
+│   │   ├── base.html
+│   │   ├── home.html
+│   │   └── analytics.html
+│   ├── static/
+│   │   ├── css/
+│   │   │   └── styles.css
+│   │   ├── js/
+│   │   │   └── scripts.js
+│   │   └── images/
+│   └── utils/
+│       ├── __init__.py
+│       ├── image_generation.py
+│       └── text_generation.py
+├── instance/
+│   └── config.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_routes.py
+│   └── test_utils.py
+├── .gitignore
+├── README.md
+├── requirements.txt
+├── run.py
+└── .env
 
 
 ## Dependencies

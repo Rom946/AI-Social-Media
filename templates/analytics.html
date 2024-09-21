@@ -40,5 +40,5 @@
     const globalComments = {{ global_comments | tojson | safe }}; // Use tojson if it's a JSON object
     const postsData = {{ posts | tojson | safe }}; // Ensure this is a valid JSON object
 </script>
-<script src="{{ url_for('static', filename='analytics.js') }}"></script>
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
 {% endblock %}
