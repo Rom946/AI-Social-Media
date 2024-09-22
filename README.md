@@ -75,6 +75,10 @@ image-generation-project/
 │   ├── __init__.py
 │   ├── routes.py
 │   ├── models.py
+    └── utils/
+        ├── __init__.py
+        ├── image_generation.py
+        └── text_generation.py
 ├── templates/
 │   ├── base.html
 │   ├── home.html
@@ -85,10 +89,7 @@ image-generation-project/
 │   ├── js/
 │   │   └── scripts.js
 │   └── images/
-└── utils/
-    ├── __init__.py
-    ├── image_generation.py
-    └── text_generation.py
+
 ├── instance/
 │   └── config.py
 ├── tests/
