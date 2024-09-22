@@ -1,10 +1,10 @@
-# Image Generation with Stable Diffusion and Text Generation
+# Image Generation with Web Scraping and Text Generation
 
-This project is a web application that generates images using the Stable Diffusion model and generates text (post names, usernames, and comments) using the GPT-Neo model from Hugging Face. The application is built with Flask and uses various libraries for image and text generation.
+This project is a web application that generates images by scraping the web based on trending topics and generates text (post names, usernames, and comments) using the GPT-Neo model from Hugging Face. The application is built with Flask and uses various libraries for image scraping and text generation.
 
 ## Features
 
-- Generate random images based on a prompt using the Stable Diffusion model.
+- Generate random images based on trending topics using web scraping.
 - Generate creative and engaging post names, usernames, and comments using the GPT-Neo model.
 - Display generated posts with images, captions, likes, dislikes, and comments.
 - Add random comments to posts.
@@ -75,20 +75,20 @@ image-generation-project/
 │   ├── __init__.py
 │   ├── routes.py
 │   ├── models.py
-│   ├── templates/
-│   │   ├── base.html
-│   │   ├── home.html
-│   │   └── analytics.html
-│   ├── static/
-│   │   ├── css/
-│   │   │   └── styles.css
-│   │   ├── js/
-│   │   │   └── scripts.js
-│   │   └── images/
-│   └── utils/
-│       ├── __init__.py
-│       ├── image_generation.py
-│       └── text_generation.py
+├── templates/
+│   ├── base.html
+│   ├── home.html
+│   └── analytics.html
+├── static/
+│   ├── css/
+│   │   └── styles.css
+│   ├── js/
+│   │   └── scripts.js
+│   └── images/
+└── utils/
+    ├── __init__.py
+    ├── image_generation.py
+    └── text_generation.py
 ├── instance/
 │   └── config.py
 ├── tests/
@@ -106,12 +106,10 @@ image-generation-project/
 
 - Flask
 - transformers
-- diffusers
-- torch
-- torchvision
-- torchaudio
 - Pillow
 - requests
+- beautifulsoup4
+- pytrends
 - huggingface_hub
 - certifi
 - pytest
@@ -128,5 +126,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Acknowledgements
 
 - [Hugging Face](https://huggingface.co/) for providing the models and libraries.
-- [PyTorch](https://pytorch.org/) for the deep learning framework.
+- [PyTrends](https://github.com/GeneralMills/pytrends) for Google Trends API.
+- [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) for web scraping.
 - [Flask](https://flask.palletsprojects.com/) for the web framework.

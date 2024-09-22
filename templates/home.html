@@ -3,28 +3,39 @@
 {% block title %}AI Instagram{% endblock %}
 
 {% block content %}
-<h1>AI Instagram</h1>
+<div class="model-specs-ribbon">
+    <span>Image Generation: {{ model_specs.image_generation }}</span>
+    <span>Text Generation: {{ model_specs.text_generation }}</span>
+</div>
+
 <div class="post-generator">
     <input type="text" id="promptInput" placeholder="Enter a prompt for the image">
     <button onclick="generatePost()">Generate Post</button>
-    <button onclick="generateRandomPost()">Generate Random Post</button>
+    <button onclick="generateRandomPost()">Random Post</button>
 </div>
 <div id="posts">
     {% for post in posts %}
     <div class="post" id="post-{{ post.id }}">
-        <h2>{{ post.caption }}</h2>
-        <p>Posted by {{ post.username }} on {{ post.date }}</p>
-        <img src="{{ post.image }}" alt="{{ post.caption }}">
+        <div class="post-header">
+            <img src="https://via.placeholder.com/30" alt="Profile Picture" class="profile-pic">
+            <span class="username">{{ post.username }}</span>
+        </div>
+        <img src="{{ post.image }}" alt="{{ post.caption }}" class="post-image">
         <div class="post-actions">
-            <button onclick="likePost({{ post.id }})">Like (<span class="likes-count">{{ post.likes }}</span>)</button>
-            <button onclick="dislikePost({{ post.id }})">Dislike (<span class="dislikes-count">{{ post.dislikes }}</span>)</button>
-            <button onclick="generateRandomComment({{ post.id }})">Generate Random Comment</button>
-            <input type="text" placeholder="Add a comment" onkeypress="addComment(event, {{ post.id }})">
+            <button onclick="likePost({{ post.id }})"><i class="fas fa-heart"></i> <span class="likes-count">{{ post.likes }}</span></button>
+            <button onclick="dislikePost({{ post.id }})"><i class="fas fa-thumbs-down"></i> <span class="dislikes-count">{{ post.dislikes }}</span></button>
+            <button onclick="generateRandomComment({{ post.id }})"><i class="fas fa-comment"></i></button>
+        </div>
+        <div class="post-caption">
+            <span class="username">{{ post.username }}</span> {{ post.caption }}
         </div>
         <div class="comments">
             {% for comment in post.comments %}
-            <p>{{ comment }}</p>
+            <p><strong>{{ comment.split(':')[0] }}</strong>: {{ comment.split(':')[1] }}</p>
             {% endfor %}
+        </div>
+        <div class="add-comment">
+            <input type="text" placeholder="Add a comment..." onkeypress="addComment(event, {{ post.id }})">
         </div>
     </div>
     {% endfor %}
