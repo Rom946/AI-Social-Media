@@ -1,7 +1,7 @@
 import requests
 from pytrends.request import TrendReq
 import logging
-from app.models import Config  # Import the Config class
+from instance.config import Config  # Import the Config class
 
 class TrendingTopicsFetcher:
     def __init__(self):

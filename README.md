@@ -8,6 +8,8 @@ This project is a web application that generates images by scraping the web base
 - Generate creative and engaging post names, usernames, and comments using the GPT-Neo model.
 - Display generated posts with images, captions, likes, dislikes, and comments.
 - Add random comments to posts.
+- View analytics of posts using Dash.
+- View top trending topics using Dash.
 
 ## Installation
 
@@ -67,6 +69,14 @@ This project is a web application that generates images by scraping the web base
 1. Click on a post to view its details.
 2. Click on the "Generate Comment" button to add a random comment to the post.
 
+### Viewing Analytics
+
+1. Navigate to `/analytics` to view the analytics dashboard.
+
+### Viewing Top Trends
+
+1. Navigate to `/top_trends` to view the top trending topics.
+
 ## Project Structure
 
 ```
@@ -75,26 +85,35 @@ image-generation-project/
 │   ├── __init__.py
 │   ├── routes.py
 │   ├── models.py
+│   ├── utils/
+│   │   ├── image_generation.py
+│   │   ├── text_generation.py
+│   │   ├── dash_top_trends.py
+│   │   ├── dash_analytics.py
+│   │   ├── download_utils.py
+│   │   └── trending_topics.py
+│   │   └── tracker.py
 ├── templates/
 │   ├── base.html
 │   ├── home.html
-│   └── analytics.html
+│   ├── analytics.html
+│   └── top_trends.html
 ├── static/
 │   ├── css/
 │   │   └── styles.css
 │   ├── js/
-│   │   └── scripts.js
+│   │   ├── scripts.js
+│   │   ├── home.js
+│   │   ├── analytics.js
+│   │   └── top_trends.js
 │   └── images/
-└── utils/
-    ├── __init__.py
-    ├── image_generation.py
-    └── text_generation.py
 ├── instance/
 │   └── config.py
 ├── tests/
 │   ├── __init__.py
 │   ├── test_routes.py
-│   └── test_utils.py
+│   ├── test_utils.py
+│   └── run_profiled.py
 ├── .gitignore
 ├── README.md
 ├── requirements.txt
@@ -105,7 +124,12 @@ image-generation-project/
 ## Dependencies
 
 - Flask
+- Dash
 - transformers
+- diffusers
+- torch
+- torchvision
+- torchaudio
 - Pillow
 - requests
 - beautifulsoup4
@@ -114,6 +138,8 @@ image-generation-project/
 - certifi
 - pytest
 - coverage
+- schedule
+- plotly
 
 ## Contributing
 
@@ -129,3 +155,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - [PyTrends](https://github.com/GeneralMills/pytrends) for Google Trends API.
 - [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) for web scraping.
 - [Flask](https://flask.palletsprojects.com/) for the web framework.
+- [Dash](https://dash.plotly.com/) for the analytics dashboard.
