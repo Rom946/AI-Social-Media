@@ -1,59 +1,55 @@
-function generatePost() {
-    const prompt = document.getElementById('promptInput').value;
-    axios.post('/generate_post', { prompt })
-        .then(response => {
-            addPostToDOM(response.data);
-        })
-        .catch(error => {
-            console.error('Error generating post:', error);
-        });
+async function generatePost(prompt = null) {
+    try {
+        const response = await axios.post('/generate_post', { prompt });
+        addPostToDOM(response.data);
+    } catch (error) {
+        console.error('Error generating post:', error);
+    }
 }
 
-function generateRandomPost() {
-    axios.post('/generate_random_post')
-        .then(response => {
-            addPostToDOM(response.data);
-        })
-        .catch(error => {
-            console.error('Error generating random post:', error);
-        });
+async function generateRandomPost() {
+    try {
+        const response = await axios.post('/generate_random_post');
+        addPostToDOM(response.data);
+    } catch (error) {
+        console.error('Error generating random post:', error);
+    }
+}
+
+function updateCount(postId, selector, increment) {
+    const countElement = document.querySelector(`#post-${postId} ${selector}`);
+    const currentCount = parseInt(countElement.textContent);
+    countElement.textContent = currentCount + increment;
 }
 
 function likePost(postId) {
-    const likeCount = document.querySelector(`#post-${postId} .likes-count`);
-    const currentLikes = parseInt(likeCount.textContent);
-    likeCount.textContent = currentLikes + 1;
+    updateCount(postId, '.likes-count', 1);
     // You can add an API call here to update the like count on the server
 }
 
 function dislikePost(postId) {
-    const dislikeCount = document.querySelector(`#post-${postId} .dislikes-count`);
-    const currentDislikes = parseInt(dislikeCount.textContent);
-    dislikeCount.textContent = currentDislikes + 1;
+    updateCount(postId, '.dislikes-count', 1);
     // You can add an API call here to update the dislike count on the server
 }
 
-function generateRandomComment(postId) {
-    axios.post(`/generate_random_comment/${postId}`)
-        .then(response => {
-            const newComment = response.data.comments[response.data.comments.length - 1];
-            addCommentToDOM(postId, newComment);
-        })
-        .catch(error => {
-            console.error('Error generating random comment:', error);
-            if (error.response) {
-                console.error(error.response.data);
-                console.error(error.response.status);
-            }
-        });
+async function generateRandomComment(postId) {
+    try {
+        const response = await axios.post(`/generate_random_comment/${postId}`);
+        const newComment = response.data.comments[response.data.comments.length - 1];
+        addCommentToDOM(postId, newComment);
+    } catch (error) {
+        console.error('Error generating random comment:', error);
+        if (error.response) {
+            console.error(error.response.data);
+            console.error(error.response.status);
+        }
+    }
 }
 
 function addComment(event, postId) {
     if (event.key === 'Enter') {
         const comment = event.target.value;
-        // Add the comment to the DOM
         addCommentToDOM(postId, `User: ${comment}`);
-        // Clear the input field
         event.target.value = '';
         // You can add an API call here to save the comment on the server
     }

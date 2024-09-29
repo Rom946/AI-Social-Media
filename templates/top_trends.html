@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Top Trends{% endblock %}
+
+{% block content %}
+    <h1>Top Trends</h1>
+    <p>Bing API Calls This Month: {{ bing_api_call_count }}</p>
+    <ul>
+        {% for engine, topics in trends.items() %}
+            <li><strong>{{ engine.capitalize() }} Trends:</strong>
+                <ul>
+                    {% for topic in topics %}
+                        <li>{{ topic }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+    <button id="update-trends-button">Update Trends</button>
+    <script src="{{ url_for('static', filename='js/top_trends.js') }}"></script>
+{% endblock %}

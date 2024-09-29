@@ -1,47 +1,47 @@
-function generatePost() {
-    const prompt = document.getElementById('promptInput').value;
-    fetch('/generate_post', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ prompt: prompt }),
-    })
-    .then(response => response.json())
-    .then(post => {
-        const postsContainer = document.getElementById('posts');
-        if (postsContainer.children.length >= 10) {
-            postsContainer.removeChild(postsContainer.firstChild);
-        }
-        const newPost = createPostElement(post);
-        postsContainer.insertBefore(newPost, postsContainer.firstChild);  // Insert new post at the top
-    })
-    .catch((error) => {
+// Function to generate a post with a given or random prompt
+async function generatePost(prompt = null) {
+    try {
+        const response = await fetch('/generate_post', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ prompt: prompt }),
+        });
+        const post = await response.json();
+        addPostToDOM(post);
+    } catch (error) {
         console.error('Error:', error);
-    });
+    }
 }
 
-function generateRandomPost() {
-    fetch('/generate_random_post', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    })
-    .then(response => response.json())
-    .then(post => {
-        const postsContainer = document.getElementById('posts');
-        if (postsContainer.children.length >= 10) {
-            postsContainer.removeChild(postsContainer.firstChild);
-        }
-        const newPost = createPostElement(post);
-        postsContainer.insertBefore(newPost, postsContainer.firstChild);  // Insert new post at the top
-    })
-    .catch((error) => {
+// Function to generate a random post
+async function generateRandomPost() {
+    try {
+        const response = await fetch('/generate_random_post', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        const post = await response.json();
+        addPostToDOM(post);
+    } catch (error) {
         console.error('Error:', error);
-    });
+    }
 }
 
+// Function to add a post to the DOM
+function addPostToDOM(post) {
+    const postsContainer = document.getElementById('posts');
+    if (postsContainer.children.length >= 10) {
+        postsContainer.removeChild(postsContainer.firstChild);
+    }
+    const newPost = createPostElement(post);
+    postsContainer.insertBefore(newPost, postsContainer.firstChild);  // Insert new post at the top
+}
+
+// Function to create a post element
 function createPostElement(post) {
     const postElement = document.createElement('div');
     postElement.className = 'post';
@@ -61,61 +61,61 @@ function createPostElement(post) {
     return postElement;
 }
 
-function likePost(postId) {
-    fetch(`/like_post/${postId}`, { method: 'POST' })
-    .then(response => response.json())
-    .then(data => {
+// Function to handle liking a post
+async function likePost(postId) {
+    try {
+        const response = await fetch(`/like_post/${postId}`, { method: 'POST' });
+        const data = await response.json();
         const likesCount = document.querySelector(`#post-${postId} .likes-count`);
         likesCount.textContent = data.likes;
-    })
-    .catch((error) => {
+    } catch (error) {
         console.error('Error:', error);
-    });
-}
-
-function dislikePost(postId) {
-    fetch(`/dislike_post/${postId}`, { method: 'POST' })
-    .then(response => response.json())
-    .then(data => {
-        const dislikesCount = document.querySelector(`#post-${postId} .dislikes-count`);
-        dislikesCount.textContent = data.dislikes;
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}
-
-function addComment(event, postId) {
-    if (event.key === 'Enter') {
-        const commentInput = event.target;
-        const comment = commentInput.value;
-        fetch(`/add_comment/${postId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ comment: comment }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            const commentsContainer = document.querySelector(`#post-${postId} .comments`);
-            commentsContainer.innerHTML = data.comments.map(c => `<p>${c}</p>`).join('');
-            commentInput.value = '';
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
     }
 }
 
-function generateRandomComment(postId) {
-    fetch(`/generate_random_comment/${postId}`, { method: 'POST' })
-    .then(response => response.json())
-    .then(data => {
+// Function to handle disliking a post
+async function dislikePost(postId) {
+    try {
+        const response = await fetch(`/dislike_post/${postId}`, { method: 'POST' });
+        const data = await response.json();
+        const dislikesCount = document.querySelector(`#post-${postId} .dislikes-count`);
+        dislikesCount.textContent = data.dislikes;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// Function to add a comment to a post when the Enter key is pressed
+async function addComment(event, postId) {
+    if (event.key === 'Enter') {
+        const commentInput = event.target;
+        const comment = commentInput.value;
+        try {
+            const response = await fetch(`/add_comment/${postId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ comment: comment }),
+            });
+            const data = await response.json();
+            const commentsContainer = document.querySelector(`#post-${postId} .comments`);
+            commentsContainer.innerHTML = data.comments.map(c => `<p>${c}</p>`).join('');
+            commentInput.value = '';
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+}
+
+// Function to generate a random comment for a post
+async function generateRandomComment(postId) {
+    try {
+        const response = await fetch(`/generate_random_comment/${postId}`, { method: 'POST' });
+        const data = await response.json();
         const commentsContainer = document.querySelector(`#post-${postId} .comments`);
         commentsContainer.innerHTML = data.comments.map(c => `<p>${c}</p>`).join('');
-    })
-    .catch((error) => {
+    } catch (error) {
         console.error('Error:', error);
-    });
+    }
 }
